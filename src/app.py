@@ -24,6 +24,8 @@ def run():
 
                 send_data(json_readings, api_key)
 
-                last_update = ticks_ms()
-            except:
+            except Exception as e:
+                print(e)
                 print('Ocorreu um erro, tentando novamente')
+                
+            last_update = ticks_ms()
