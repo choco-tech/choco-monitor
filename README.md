@@ -21,7 +21,7 @@ O ESP-32 lê os dados capturados pelo sensor DHT-11 e envia para um servidor MQT
 
 Esse é o estado atual do projeto.
 
-## Proximos passos
+## Próximos passos
 
 Por enquanto temos um monitor bem simples, mas ainda há muito o que melhorar, segue aqui algumas das melhorias futuras:
 
@@ -30,3 +30,48 @@ Por enquanto temos um monitor bem simples, mas ainda há muito o que melhorar, s
 * Enviar um email quando a temperatura ou humidade estiverem fora dos padrões.
 * Ligar o ar-condicionado para controlar a temperatura e a humidade.
 * Medir o gasto de energia com ar-condicionado. 
+
+## Como testar o projeto
+
+Para essa finalidade será necessário montar o circuito descrito no tópico de desenvolvimento, fora isso será necessário criar uma conta no site thingspeak que é será utilizado como servidor MQTT.
+
+Com a conta criada, crie um canal com seguinte configuração:
+![image](https://user-images.githubusercontent.com/49599535/232954222-c677f72e-2f5b-4814-b832-9fcd47b1920e.png)
+
+Agora faça o clone do projeto com o seguinte comando:
+
+```bash
+git clone https://github.com/choco-tech/choco-monitor.git
+```
+Ou simplemente faça o download dos arquivos em zip.
+
+Agora será necessário fazer upload do código no ESP-32, uma das formas mais simples de se fazer isso é utilizando uma IDE como o Thonny.
+[Clique aqui](https://thonny.org/) para fazer o download do Thonny. 
+
+Basta abrir a pasta no Thonny e clicar com o botão direito nos arquivos e pastas, selecione a opção 'Uplaod to /' ilustrado na imagem abaixo:
+![image](https://user-images.githubusercontent.com/49599535/232955977-d1d1014b-8514-4119-8291-02049461e3a9.png)
+
+Será necessário também criar um arquivo secret.py, onde será configurado os dados de acesso ao Wifi e outras informações:
+
+O arquivo secret.py deve ter a seguinte estrutura:
+```python
+wifi = {
+    'SSID': '',
+    'PASSWORD': ''
+}
+
+thingspeak = {
+    'WRITE_KEY': ''
+}
+
+sensors = {
+    'DHT11_PORT': 4
+}
+```
+
+Obs: </br>
+A 'WRITE_KEY' serve para enviar dados para o servidor MQTT, poderá encontrar essa chave no seu canal do Thingspeak.</br>
+O campo 'DHT11_PORT' deve conter a porta utilizada pelo sensor DHT11 na sua instalação do circuito.
+
+Crie o arquivo, insira os dados necessários e faça upload da para a pasta / do ESP-32.
+ 
