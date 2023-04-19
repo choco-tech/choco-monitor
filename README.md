@@ -1,8 +1,10 @@
 # Choco Monitor
 
-Este é um projeto de IOT elaborado e mantido pelos alunos do curso de Big Data da Fatec Ipiranga. Ele tem como objetivo coletar dados de temperatura e humidade para a Fábrica de Alegrias. A fábrica de chocolates foi criada por um dos alunos o Gilberto Magalhães.
+Este é um projeto de IOT elaborado e mantido pelos alunos do curso de Big Data da Fatec Ipiranga. Ele tem como objetivo coletar dados de temperatura e humidade para a Fábrica de Alegrias. 
 
-Visite o site [fabricadealegrias.com](https://www.fabricadealegrias.com/) e conheça seu trabalho!
+A Fábrica de Alegrias fabrica chocolates e foi criada por um dos alunos o Gilberto Magalhães.
+
+Visite o site <a href="https://www.fabricadealegrias.com/" target="_blank">fabricadealegrias.com</a> e conheça seu trabalho!
 
 ## Motivação do projeto
 
