@@ -8,7 +8,7 @@ Visite o site <a href="https://www.fabricadealegrias.com/" target="_blank">fabri
 
 ## Motivação do projeto
 
-Durante uma das aulas de IOT, ministrada pelo professor Carlos Menezes, estudavamos sobre a utilização de um sensor de humidade e temperatura (DHT11), nessa ocasião o Giberto nos contou um pouco de como funcionava a confecção dos chocolates e ressaltou como era importante o monitoramento dessas variáveis na produção. A partir daí começamos a elaborar esse projeto de monitor de temperatura e humidade para o Gilberto instalar em sua fábrica. A ideia é tornar esse processo que atuamente é realizado apenas com a experiência e conhecimento do Gilberto, em um processo mais tecnologico e automático, possibilitando um maior controle da produção e melhor qualidade do produto.
+Durante uma das aulas de IOT, ministrada pelo professor Carlos Menezes, estudávamos sobre a utilização de um sensor de humidade e temperatura (DHT11), nessa ocasião o Giberto nos contou um pouco de como funcionava a confecção dos chocolates e ressaltou como era importante o monitoramento dessas variáveis na produção. A partir daí começamos a elaborar esse projeto de monitor de temperatura e humidade para o Gilberto instalar em sua fábrica. A ideia é tornar esse processo que atuamente é realizado apenas com a experiência e conhecimento do Gilberto, em um processo mais tecnologico e automático, possibilitando um maior controle da produção e melhor qualidade do produto.
 
 ## Desenvolvimento
 
