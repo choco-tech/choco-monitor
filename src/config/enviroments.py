@@ -1,4 +1,4 @@
-from src.config.secrets import wifi, thingspeak
+from secret import wifi, thingspeak
 
 envs = {
     'THINGSPEAK_WRITE_API_KEY': thingspeak['WRITE_KEY'],
