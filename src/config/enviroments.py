@@ -1,4 +1,5 @@
 from secret import wifi, thingspeak
+from secret import sensors
 
 envs = {
     'THINGSPEAK_WRITE_API_KEY': thingspeak['WRITE_KEY'],
@@ -6,5 +7,5 @@ envs = {
     'WIFI_SSID': wifi['SSID'],
     'WIFI_PASSWORD': wifi['PASSWORD'],
 
-    'DHT11_PORT': 14
+    'DHT11_PORT': sensors['DHT11_PORT']
 }
