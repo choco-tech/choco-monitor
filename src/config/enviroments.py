@@ -7,5 +7,13 @@ envs = {
     'WIFI_SSID': wifi['SSID'],
     'WIFI_PASSWORD': wifi['PASSWORD'],
 
-    'DHT11_PORT': sensors['DHT11_PORT']
+    'DHT11_PORT': sensors['DHT11_PORT'],
+
+    # firebase, thingspeak
+    'MQTT_SERVER': 'thingspeak' 
+}
+
+
+fake_services = {
+    'FAKE_DHT11': True,
 }
