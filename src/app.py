@@ -1,11 +1,8 @@
-from time import ticks_ms
-
 from src.config.enviroments import envs
 from src.core.wifi import do_connect
 from src.core.mqtt.thingspeak_service import run_thingspeak
 from src.core.mqtt.firebase.firebase_service import run_firebase
 from update import start_update
-
 
 def init():
     do_connect(envs['WIFI_SSID'], envs['WIFI_PASSWORD'])

@@ -5,17 +5,44 @@ from src.core.dht11 import collect_data
 from src.utils.date_utils import get_current_timestamp
 from secret import room_info
 
-from time import ticks_ms, sleep, mktime
+from time import ticks_ms, sleep
 
-def __send_data(data):
-    firebase.addto("readings/dht11/room1", data, bg=0)
-    print('Enviado:', data)
+def __put_data(topic_name, data):
+    firebase.put(
+        topic_name,
+        data, 
+        bg=0, 
+    )
+    print(data)
+    
+def __add_data(topic_name, data):
+    firebase.addto(
+        topic_name,
+        data, 
+        bg=0, 
+    )
+    print(data)
 
-def run_firebase():
+def authenticate():
+    from src.core.mqtt.firebase.firebase_auth import FirebaseAuth
+
+    auth = FirebaseAuth("AIzaSyClJO20-MbwmGtQacyQYb73h2Tx-tSHaxg")
+    auth.sign_in('lucas.garcia15@fatec.sp.gov.br', 'ChocoFire')
+
+def init():
+    authenticate()
+
     firebase.setURL(envs['FIREBASE_URL'])
 
-    firebase.put("rooms/room1", room_info, bg=0)
-	
+def run_firebase():
+    init()
+
+    firebase.put(
+        f'rooms/{envs["ROOM_NAME"]}', 
+        room_info,
+        bg=0
+    )
+
     time_interval = envs['UPDATE_TIME_INTERVAL']
 
     last_update = ticks_ms()
@@ -30,13 +57,16 @@ def run_firebase():
                 readings = { 
                     'celsius': celsius, 
                     'humidity': humidity, 
-                    'created_at': mktime(created_at) 
+                    'created_at': created_at
                 }
-
-                __send_data(readings)
+                
+                __put_data(f'readings/dht11/{envs["ROOM_NAME"]}', readings)
                 
                 last_update = ticks_ms()
             except Exception as e:
-                print(e)
-                print('Ocorreu um erro, tentando novamente...')
+                error = f"erro: main function, description: {str(e)}, created_at: {get_current_timestamp()}"
+                print(error)
+
+                __add_data(f'errors/{envs["ROOM_NAME"]}', error)
+                
                 sleep(1)

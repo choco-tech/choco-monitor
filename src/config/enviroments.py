@@ -1,4 +1,4 @@
-from secret import wifi, thingspeak, firebase
+from secret import wifi, thingspeak, firebase, room_info
 from secret import sensors
 
 envs = {
@@ -17,7 +17,9 @@ envs = {
     'UPDATE_TIME_INTERVAL': 5000,
 
     # OPTIONS: firebase, thingspeak
-    'MQTT_SERVER': 'firebase' 
+    'MQTT_SERVER': 'firebase',
+
+    'ROOM_NAME': room_info['id']
 }
 
 

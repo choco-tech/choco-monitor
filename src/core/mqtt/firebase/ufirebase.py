@@ -31,7 +31,7 @@ class INTERNAL:
       FIREBASE_GLOBAL_VAR.SLIST["SS"+id]=None
       FIREBASE_GLOBAL_VAR.SLIST["S"+id]=None
         
-  def put(PATH, DATA, id, cb):
+  def put(PATH, DATA, id, cb, token):
       try:
         while FIREBASE_GLOBAL_VAR.SLIST["SS"+id]:
           time.sleep(2)
@@ -42,7 +42,10 @@ class INTERNAL:
       LOCAL_SS=FIREBASE_GLOBAL_VAR.SLIST["SS"+id]
       LOCAL_SS.write(b"PUT /"+PATH+b".json HTTP/1.0\r\n")
       LOCAL_SS.write(b"Host: "+FIREBASE_GLOBAL_VAR.GLOBAL_URL_ADINFO["host"]+b"\r\n")
+      if token != '':
+         LOCAL_SS.write(b"Authorization: Bearer " + token+b"\r\n")
       LOCAL_SS.write(b"Content-Length: "+str(len(DATA))+"\r\n\r\n")
+      
       LOCAL_SS.write(DATA)
       LOCAL_DUMMY=LOCAL_SS.read()
       del LOCAL_DUMMY
@@ -167,13 +170,14 @@ class INTERNAL:
           except:
             raise OSError("Callback function could not be executed. Try the function without ufirebase.py callback.")  
       
-  def addto(PATH, DATA, DUMP, id, cb):
+  def addto(PATH, DATA, DUMP, id, cb, token):
       try:
         while FIREBASE_GLOBAL_VAR.SLIST["SS"+id]:
           time.sleep(1)
         FIREBASE_GLOBAL_VAR.SLIST["SS"+id]=True
       except:
         FIREBASE_GLOBAL_VAR.SLIST["SS"+id]=True
+        
       INTERNAL.connect(id)
       LOCAL_SS=FIREBASE_GLOBAL_VAR.SLIST["SS"+id]
       LOCAL_SS.write(b"POST /"+PATH+b".json HTTP/1.0\r\n")
@@ -182,6 +186,7 @@ class INTERNAL:
       LOCAL_SS.write(DATA)
       LOCAL_OUTPUT=ujson.loads(LOCAL_SS.read().splitlines()[-1])
       INTERNAL.disconnect(id)
+      
       if DUMP:
         globals()[DUMP]=LOCAL_OUTPUT["name"]
       if cb:
@@ -214,11 +219,11 @@ def setURL(url):
         
     FIREBASE_GLOBAL_VAR.GLOBAL_URL_ADINFO={"proto": proto, "host": host, "port": port}
 
-def put(PATH, DATA, bg=True, id=0, cb=None):
+def put(PATH, DATA, bg=True, id=0, cb=None, token=""):
     if bg:
-      _thread.start_new_thread(INTERNAL.put, [PATH, ujson.dumps(DATA), str(id), cb])
+      _thread.start_new_thread(INTERNAL.put, [PATH, ujson.dumps(DATA), str(id), cb, token])
     else:
-      INTERNAL.put(PATH, ujson.dumps(DATA), str(id), cb)
+      INTERNAL.put(PATH, ujson.dumps(DATA), str(id), cb, token)
 
 def patch(PATH, DATATAG, bg=True, id=0, cb=None):
     if bg:
@@ -244,8 +249,9 @@ def delete(PATH, bg=True, id=0, cb=None):
     else:
       INTERNAL.delete(PATH, str(id), cb)
     
-def addto(PATH, DATA, DUMP=None, bg=True, id=0, cb=None):
+def addto(PATH, DATA, DUMP=None, bg=True, id=0, cb=None, token=""):
     if bg:
-      _thread.start_new_thread(INTERNAL.addto, [PATH, ujson.dumps(DATA), DUMP, str(id), cb])
+      _thread.start_new_thread(INTERNAL.addto, [PATH, ujson.dumps(DATA), DUMP, str(id), cb, token])
     else:
-      INTERNAL.addto(PATH, ujson.dumps(DATA), DUMP, str(id), cb)
+      INTERNAL.addto(PATH, ujson.dumps(DATA), DUMP, str(id), cb, token)
+
