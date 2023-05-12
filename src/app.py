@@ -4,8 +4,11 @@ from src.core.mqtt.thingspeak_service import run_thingspeak
 from src.core.mqtt.firebase.firebase_service import run_firebase
 from update import start_update
 
+from src.utils.date_utils import set_ntp_time
+
 def init():
     do_connect(envs['WIFI_SSID'], envs['WIFI_PASSWORD'])
+    set_ntp_time()
     start_update()
 
 def run():

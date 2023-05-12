@@ -23,22 +23,11 @@ def __add_data(topic_name, data):
     )
     print(data)
 
-def authenticate():
-    from src.core.mqtt.firebase.firebase_auth import FirebaseAuth
-
-    auth = FirebaseAuth("AIzaSyClJO20-MbwmGtQacyQYb73h2Tx-tSHaxg")
-    auth.sign_in('lucas.garcia15@fatec.sp.gov.br', 'ChocoFire')
-
-def init():
-    authenticate()
-
+def run_firebase():
     firebase.setURL(envs['FIREBASE_URL'])
 
-def run_firebase():
-    init()
-
     firebase.put(
-        f'rooms/{envs["ROOM_NAME"]}', 
+        f'rooms/{room_info["id"]}', 
         room_info,
         bg=0
     )
@@ -52,21 +41,20 @@ def run_firebase():
             try:
                 celsius, humidity = collect_data()
                 
-                created_at = get_current_timestamp()
-                
                 readings = { 
                     'celsius': celsius, 
-                    'humidity': humidity, 
-                    'created_at': created_at
+                    'humidity': humidity,
+                    'roomId': room_info['id'],
+                    'roomName': room_info['name']
                 }
                 
-                __put_data(f'readings/dht11/{envs["ROOM_NAME"]}', readings)
+                __add_data('readings/dht11', readings)
                 
                 last_update = ticks_ms()
             except Exception as e:
-                error = f"erro: main function, description: {str(e)}, created_at: {get_current_timestamp()}"
+                error = f'erro: main function, description: {str(e)}, created_at: {get_current_timestamp()}'
                 print(error)
 
-                __add_data(f'errors/{envs["ROOM_NAME"]}', error)
+                __add_data(f'errors/{room_info["id"]}', error)
                 
                 sleep(1)

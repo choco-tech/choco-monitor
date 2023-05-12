@@ -14,15 +14,15 @@ envs = {
     # GENERAL ENVS
     'DHT11_PORT': sensors['DHT11_PORT'],
 
-    'UPDATE_TIME_INTERVAL': 5000,
+    'UPDATE_TIME_INTERVAL': 20000,
 
     # OPTIONS: firebase, thingspeak
     'MQTT_SERVER': 'firebase',
 
-    'ROOM_NAME': room_info['id']
+    'ROOM_ID': room_info['id']
 }
 
 
 fake_services = {
-    'FAKE_DHT11': True,
+    'FAKE_DHT11': False,
 }

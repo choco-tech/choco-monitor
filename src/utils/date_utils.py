@@ -3,11 +3,9 @@ import ntptime
 
 def set_ntp_time():
     try:
-        print(time.localtime())
         ntptime.host = "a.ntp.br"
         
         ntptime.settime()
-        print(time.localtime())
     except:
         print('Ocorreu um problema ao atualizar a data.')
         pass
