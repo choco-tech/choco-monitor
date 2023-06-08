@@ -10,7 +10,7 @@ def set_ntp_time():
         print('Ocorreu um problema ao atualizar a data.')
         pass
 
-def get_current_timestamp():
+def get_date():
     ano, mes, dia, hora, min, seg, m, n = time.localtime(time.time())
 
     return f"{ano}/{mes}/{dia} {hora}:{min}:{seg}"

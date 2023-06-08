@@ -1,8 +1,9 @@
+from machine import reset
 import src.core.mqtt.firebase.ufirebase as firebase
 
 from src.config.enviroments import envs
 from src.core.dht11 import collect_data
-from src.utils.date_utils import get_current_timestamp
+from src.utils.date_utils import get_date
 from secret import room_info
 
 from time import ticks_ms, sleep
@@ -45,16 +46,18 @@ def run_firebase():
                     'celsius': celsius, 
                     'humidity': humidity,
                     'roomId': room_info['id'],
-                    'roomName': room_info['name']
+                    'roomName': room_info['name'],
+                    'createdAt': get_date()
                 }
                 
                 __add_data('readings/dht11', readings)
                 
                 last_update = ticks_ms()
             except Exception as e:
-                error = f'erro: main function, description: {str(e)}, created_at: {get_current_timestamp()}'
+                error = f'erro: main function, description: {str(e)}, createdAt: {get_date()}'
                 print(error)
 
                 __add_data(f'errors/{room_info["id"]}', error)
                 
                 sleep(1)
+                reset()

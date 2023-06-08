@@ -1,4 +1,8 @@
 import src.app as app
+from machine import reset
 
-app.init()
-app.run()
+try:
+    app.init()
+    app.run()
+except:
+    reset()
