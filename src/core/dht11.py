@@ -6,7 +6,7 @@ from src.config.enviroments import envs, fake_services
 dht11_sensor = DHT11(Pin(envs['DHT11_PORT']))
 
 def collect_data():
-    if fake_services['FAKE_DHT11']:
+    if fake_services['FAKE_DHT']:
         return _collect_fake_data()
     else:
         return _collect_real_data()  
