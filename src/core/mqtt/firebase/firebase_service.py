@@ -2,7 +2,7 @@ from machine import reset
 import src.core.mqtt.firebase.ufirebase as firebase
 
 from src.config.enviroments import envs
-from src.core.dht11 import collect_data
+from src.core.dht22 import collect_data
 from src.utils.date_utils import get_date
 from secret import room_info
 
@@ -50,7 +50,7 @@ def run_firebase():
                     'createdAt': get_date()
                 }
                 
-                __add_data('readings/dht11', readings)
+                __add_data('readings/dht22', readings)
                 
                 last_update = ticks_ms()
             except Exception as e:

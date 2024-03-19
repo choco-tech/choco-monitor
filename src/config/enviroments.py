@@ -12,7 +12,7 @@ envs = {
     'FIREBASE_URL': firebase['URL'],
 
     # GENERAL ENVS
-    'DHT11_PORT': sensors['DHT11_PORT'],
+    'DHT22_PORT': sensors['DHT22_PORT'],
 
     'UPDATE_TIME_INTERVAL': 20000,
 

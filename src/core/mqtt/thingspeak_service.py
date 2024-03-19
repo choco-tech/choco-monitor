@@ -2,7 +2,7 @@ from machine import reset
 from urequests import post
 
 from src.config.enviroments import envs
-from src.core.dht11 import collect_data
+from src.core.dht22 import collect_data
 from src.utils.date_utils import get_date
 
 from time import ticks_ms, sleep, mktime
