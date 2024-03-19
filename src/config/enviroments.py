@@ -24,5 +24,5 @@ envs = {
 
 
 fake_services = {
-    'FAKE_DHT11': False,
+    'FAKE_DHT': False,
 }
