@@ -1,22 +1,15 @@
 from src.config.enviroments import envs
-from src.core.wifi import do_connect
-from src.core.mqtt.thingspeak_service import run_thingspeak
+from src.core.wifi import find_an_network
 from src.core.mqtt.firebase.firebase_service import run_firebase
-from update import start_update
+from src.update import start_update
 
 from src.utils.date_utils import set_ntp_time
 
 def init():
-    do_connect(envs['WIFI_SSID'], envs['WIFI_PASSWORD'])
+    find_an_network()
     set_ntp_time()
     start_update()
 
 def run():
-    mqtt_server = envs['MQTT_SERVER']
+    run_firebase()
     
-    if mqtt_server == 'thingspeak':
-        run_thingspeak()
-    elif mqtt_server == 'firebase':
-        run_firebase()
-    else:
-        print('Servidor MQTT inválido.')

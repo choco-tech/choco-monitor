@@ -54,10 +54,13 @@ def run_firebase():
                 
                 last_update = ticks_ms()
             except Exception as e:
-                error = f'erro: main function, description: {str(e)}, createdAt: {get_date()}'
+                error = f'[ERRO]: main function, description: {str(e)}, createdAt: {get_date()}'
                 print(error)
 
-                __add_data(f'errors/{room_info["id"]}', error)
+                try:
+                    print('tentando registrar o erro no firebase')
+                    __add_data(f'errors/{room_info["id"]}', error)
+                except:
+                    print('[ERRO]: Nao foi possivel registrar o erro')
                 
-                sleep(1)
                 reset()

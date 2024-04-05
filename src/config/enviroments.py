@@ -1,9 +1,8 @@
-from secret import wifi, thingspeak, firebase, room_info
+from secret import wifi_list, thingspeak, firebase, room_info
 from secret import sensors
 
 envs = {
-    'WIFI_SSID': wifi['SSID'],
-    'WIFI_PASSWORD': wifi['PASSWORD'],
+    'WIFI_LIST': wifi_list,
 
     # THINGSPEAK ENVS
     'THINGSPEAK_WRITE_API_KEY': thingspeak['WRITE_KEY'],
