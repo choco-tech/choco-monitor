@@ -57,10 +57,4 @@ def run_firebase():
                 error = f'[ERRO]: main function, description: {str(e)}, createdAt: {get_date()}'
                 print(error)
 
-                try:
-                    print('tentando registrar o erro no firebase')
-                    __add_data(f'errors/{room_info["id"]}', error)
-                except:
-                    print('[ERRO]: Nao foi possivel registrar o erro')
-                
                 reset()
